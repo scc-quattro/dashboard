@@ -278,7 +278,7 @@ class TraceReader:
         item_type = payload.get("type")
         if kind == "response_item" and item_type == "message":
             role = payload.get("role")
-            if role not in {"user", "assistant"}:
+            if role not in {"user", "assistant"} or payload.get("channel") == "analysis":
                 return None
             texts = [part.get("text", "") for part in payload.get("content", [])
                      if isinstance(part, dict) and part.get("type") in {"input_text", "output_text"}]

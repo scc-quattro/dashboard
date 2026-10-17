@@ -28,6 +28,7 @@ class TraceTests(unittest.TestCase):
             self.row("response_item", {"type": "message", "role": "developer", "content": [{"type": "input_text", "text": "private policy"}]}),
             self.row("event_msg", {"type": "task_started"}),
             self.row("response_item", {"type": "reasoning", "summary": [{"text": "private reasoning"}]}),
+            self.row("response_item", {"type": "message", "role": "assistant", "channel": "analysis", "content": [{"type": "output_text", "text": "private analysis channel"}]}),
             self.row("response_item", {"type": "message", "role": "user", "content": [{"type": "input_text", "text": '<bridge_context>private metadata</bridge_context><user_input>{"text":"[Alice (user)]: Check api_key=abc123"}</user_input>'}]}),
             self.row("response_item", {"type": "custom_tool_call", "name": "exec", "call_id": "one", "input": 'await tools.exec_command({cmd:"cat /tmp/example/.env"})'}),
             self.row("response_item", {"type": "custom_tool_call_output", "call_id": "one", "output": [{"type": "input_text", "text": "ACCESS_TOKEN=very-secret-value"}]}),
@@ -50,7 +51,7 @@ class TraceTests(unittest.TestCase):
         reader = TraceReader({"demo-project": self.root / "demo-project"}, self.sessions)
         result = reader.read_session(self.sid)
         text = json.dumps(result, ensure_ascii=False)
-        for private in ["private policy", "private reasoning", "private metadata", "cat /home", "very-secret-value", "abc123", "top-secret-value"]:
+        for private in ["private policy", "private reasoning", "private analysis channel", "private metadata", "cat /tmp", "very-secret-value", "abc123", "top-secret-value"]:
             self.assertNotIn(private, text)
         self.assertIn("exec_command", text)
         self.assertIn("[已隐藏]", text)
