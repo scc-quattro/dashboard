@@ -5,6 +5,8 @@
 
 A configurable, read-only project dashboard with synthetic demo data, evidence-bound metrics, local agent timelines, and standalone HTML export.
 
+[在线 Demo](https://scc-quattro.github.io/dashboard/) 使用虚构数据的静态快照，无需启动 Python 服务。
+
 ![使用虚构数据的看板演示](docs/preview.png)
 
 ## 快速开始
@@ -71,6 +73,14 @@ ssh -N -L 8790:127.0.0.1:8790 your-server
 ```bash
 python3 server.py --export artifacts/dashboard.html
 ```
+
+GitHub Pages 演示从 `gh-pages` 分支的根目录发布。演示页固定使用示例配置生成：
+
+```bash
+python3 server.py --config examples/dashboard.json --export artifacts/pages/index.html
+```
+
+将生成的 `index.html`、空的 `.nojekyll` 文件及项目和 ECharts 的许可、NOTICE 文件放到发布分支。首次使用时，在仓库 **Settings → Pages** 中选择 **Deploy from a branch → gh-pages → /(root)** 并保存。该静态页面支持图表、筛选、搜索和项目详情；数据在重新导出发布时更新。
 
 `GET /api/dashboard` 返回聚合数据，`GET /api/health` 返回健康状态，`GET /download.json` 导出 JSON。接入真实数据后，聚合接口和快照可能包含项目报告正文，请自行决定分享范围。
 
