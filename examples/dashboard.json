@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "demo": true,
+  "title": "Project Observatory",
+  "subtitle": "团队项目 · 可验证的进展与性能",
+  "timezone": "Asia/Shanghai",
+  "refresh_seconds": 60,
+  "phase_labels": [
+    "代码与数据",
+    "环境与小测",
+    "完整基线",
+    "优化与验证"
+  ],
+  "traces": {
+    "enabled": false
+  },
+  "projects": [
+    {
+      "id": "compute",
+      "name": "Compute Lab",
+      "kind": "CPU",
+      "cluster": "Demo workspace",
+      "description": "矩阵计算实验",
+      "path": "projects/compute",
+      "report": "dashboard.json"
+    },
+    {
+      "id": "vision",
+      "name": "Vision Bench",
+      "kind": "GPU",
+      "cluster": "Demo workspace",
+      "description": "图像推理优化",
+      "path": "projects/vision",
+      "report": "dashboard.json"
+    },
+    {
+      "id": "pipeline",
+      "name": "Search Pipeline",
+      "kind": "CPU",
+      "cluster": "Demo workspace",
+      "description": "批量搜索与数据流水线",
+      "path": "projects/pipeline",
+      "report": "dashboard.json"
+    },
+    {
+      "id": "service",
+      "name": "Inference Service",
+      "kind": "GPU",
+      "cluster": "Demo workspace",
+      "description": "服务化与部署验证",
+      "path": "projects/service",
+      "report": "dashboard.json"
+    }
+  ]
+}

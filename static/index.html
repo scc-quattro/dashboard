@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Project Observatory</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/style.css">
+  <script src="/vendor/echarts.min.js" defer></script>
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <header class="masthead">
+    <div class="masthead-inner">
+      <a href="#" class="brand" aria-label="项目看板首页">
+        <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M3 3h10v10H3zM19 3h10v10H19zM3 19h10v10H3zM19 19h10v10H19z" fill="currentColor"></path><path d="M13 8h6M8 13v6M24 13v6M13 24h6" stroke="currentColor" stroke-width="2"></path></svg>
+        <span id="brand-title">Project Observatory</span>
+      </a>
+      <nav class="top-nav" aria-label="页面导航"><a href="#projects">项目</a><a href="#performance">性能</a><a href="#bounds">上界差距</a><a href="#learning">版本复盘</a><a href="#traces">Agent Trace</a><a href="#jobs">作业记录</a></nav>
+      <div class="header-status"><span class="status-dot"></span>项目报告自动更新</div>
+    </div>
+  </header>
+
+  <main class="page" data-screen-label="项目进展总览">
+    <section class="page-heading" aria-labelledby="page-title">
+      <div><div class="eyebrow">TEAM WORKSPACE</div><h1 id="page-title">Project Observatory</h1><p class="subtitle" id="page-subtitle">可配置的只读项目看板</p></div>
+      <div class="heading-actions"><a class="button secondary" id="export-button" href="/download.html" download="project-dashboard.html"><span data-icon="download"></span>导出快照</a><button class="button primary" id="refresh-button"><span data-icon="refresh"></span><span id="refresh-label">刷新记录</span></button></div>
+    </section>
+
+    <div id="data-banner" class="demo-banner" role="status" hidden>演示数据 · 所有项目、指标与作业均为虚构示例。</div>
+    <div id="error-banner" class="error-banner" role="alert" hidden></div>
+    <div class="summary-strip" id="summary-strip" aria-live="polite"><span class="loading-label">正在读取项目记录…</span></div>
+
+    <section class="section" id="projects" aria-labelledby="projects-title">
+      <div class="section-heading"><div><h2 id="projects-title">项目进展</h2><p>先看阶段，再看经过验证的结果。</p></div><div class="source-caption" id="generated-at">等待更新</div></div>
+      <div class="filters">
+        <div class="segmented" id="resource-filters" role="group" aria-label="按资源类型筛选"></div>
+        <label class="search-field"><span data-icon="search"></span><input id="search" type="search" placeholder="搜索项目、阶段或集群" aria-label="搜索项目、阶段或集群"></label>
+      </div>
+      <div class="project-table">
+        <div class="project-table-head"><span>项目 / 资源</span><span>当前阶段</span><span>验证路径</span><span>关键记录</span><span></span></div>
+        <div id="project-list" aria-live="polite"><div class="empty-state">正在读取配置的项目报告。</div></div>
+      </div>
+      <div class="evidence-key"><span><i class="phase-dot done"></i>有记录支持</span><span><i class="phase-dot active"></i>当前工作</span><span><i class="phase-dot pending"></i>尚待验证</span><span class="key-note">文件到位不等于运行成功；阶段不换算为完成百分比。</span></div>
+    </section>
+
+    <section class="section" id="performance" aria-labelledby="performance-title">
+      <div class="section-heading"><div><h2 id="performance-title">已验证的性能</h2><p>保留实验条件，分别比较吞吐率与求解时间。</p></div><span class="source-caption">数值由项目报告提供</span></div>
+      <div class="analysis-grid" id="analysis-grid"><div class="panel empty-state">正在读取性能记录…</div></div>
+    </section>
+
+    <section class="section" id="bounds" aria-labelledby="bounds-title">
+      <div class="section-heading"><div><h2 id="bounds-title">距离性能上界还有多远</h2><p>先确认比较条件，再判断剩余空间。条件模型、硬件参考和未知上界分别标注。</p></div><span class="source-caption">公式与当前验收证据绑定</span></div>
+      <div class="bounds-grid" id="bounds-list" aria-live="polite"><div class="panel empty-state">正在核对上界模型…</div></div>
+    </section>
+
+    <section class="section" id="learning" aria-labelledby="learning-title" hidden>
+      <div class="section-heading"><div><h2 id="learning-title">版本复盘</h2><p>点击版本，查看问题、机制、验收方法和可迁移经验。</p></div><label class="source-caption">项目 <select id="learning-project" aria-label="选择复盘项目"></select></label></div>
+      <div class="panel learning-panel"><div id="version-picker" class="version-picker" role="group" aria-label="选择复盘版本"></div><div id="version-detail" aria-live="polite"></div></div>
+    </section>
+
+    <section class="section" id="traces" aria-labelledby="traces-title">
+      <div class="section-heading"><div><h2 id="traces-title">Codex 会话 Trace</h2><p>同一时钟上的主会话与子 Agent：看协作节奏，也能逐步打开执行明细。</p></div><button class="button secondary" id="trace-refresh" type="button"><span data-icon="refresh"></span>更新会话</button></div>
+      <div class="trace-boundary">会话可能包含私人信息；详细内容仅在本机或 SSH 隧道中可查看。推理内容与原始工具输出不会进入看板或离线快照。</div>
+      <div class="trace-workspaces" id="trace-workspaces" role="group" aria-label="按工作区筛选会话"></div>
+      <div class="trace-flow" id="trace-flow" hidden>
+        <div class="flow-terminal"><div class="flow-command"><span class="flow-prompt-square"></span><span class="flow-prompt-dollar">$</span><code id="flow-command">codex trace</code></div><span class="flow-ready"><i></i> LOCAL TRACE</span></div>
+        <div class="flow-toolbar"><div><strong id="flow-title">Agent 时间线</strong><span id="flow-range-label"></span></div><div class="flow-windows" role="group" aria-label="时间线范围"><button type="button" data-flow-window="all" aria-pressed="true">全程</button><button type="button" data-flow-window="120" aria-pressed="false">近 2 小时</button><button type="button" data-flow-window="30" aria-pressed="false">近 30 分钟</button></div></div>
+        <div class="flow-scroll"><div class="flow-chart" id="flow-chart" aria-label="Agent 与工具调用的共同时间线"></div></div>
+        <div class="flow-footer"><div class="flow-legend"><span><i class="turn"></i>轮次</span><span><i class="read"></i>读取</span><span><i class="write"></i>写入</span><span><i class="run"></i>运行</span><span><i class="mixed"></i>混合</span></div><span id="flow-summary"></span></div>
+      </div>
+      <div class="trace-layout"><div class="panel trace-index"><div class="trace-panel-title">会话列表 <span id="trace-count"></span></div><div id="trace-sessions" class="trace-sessions"><div class="empty-state">正在读取会话索引…</div></div></div><div class="panel trace-detail"><div id="trace-heading" class="trace-panel-title">选择一个会话查看时间线</div><div id="trace-events" class="trace-events"><div class="empty-state">按工作区选择左侧会话。</div></div><button id="trace-more" class="button secondary trace-more" type="button" hidden>继续加载</button></div></div>
+    </section>
+
+    <div class="lower-grid">
+      <section class="panel jobs-panel" id="jobs" aria-labelledby="jobs-title"><div class="panel-heading"><div><h2 id="jobs-title">作业最近观测</h2></div><span id="job-age" class="small-label">等待记录</span></div><p class="panel-description">来自已有监控日志；记录超过5分钟会标为陈旧。</p><div class="job-table-wrap"><table class="job-table"><thead><tr><th>作业</th><th>用途</th><th>最近状态</th><th>已运行</th></tr></thead><tbody id="job-list"><tr><td colspan="4">正在读取记录…</td></tr></tbody></table></div><p class="panel-footnote">作业结束不代表结果验收；作业从队列消失时显示“未观测”，不推断成功。</p></section>
+      <section class="panel focus-panel" aria-labelledby="focus-title"><div class="panel-heading"><h2 id="focus-title">建议下一步</h2><span class="small-label">按项目</span></div><div id="focus-list"></div><p class="panel-footnote">来自项目现状的建议，不代表已提交或已执行。</p></section>
+    </div>
+
+    <footer class="page-footer"><span>PROJECT OBSERVATORY</span><p id="footer-status">只读项目看板</p></footer>
+  </main>
+
+  <dialog id="project-dialog" aria-labelledby="dialog-title"><div class="dialog-top"><span class="eyebrow">PROJECT DETAILS</span><button class="icon-button" id="close-dialog" aria-label="关闭项目详情"><span data-icon="close"></span></button></div><div id="dialog-body"></div></dialog>
+  <noscript><p>此看板需要启用 JavaScript 才能读取和展示项目记录。</p></noscript>
+</body>
+</html>

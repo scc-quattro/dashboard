@@ -1,0 +1,83 @@
+{
+  "stage": "演示 · 基线已验证",
+  "tone": "success",
+  "summary": "图像推理优化的虚构展示数据，请替换为自己的项目报告。",
+  "baseline_verified": true,
+  "phase_states": [
+    "done",
+    "done",
+    "done",
+    "active"
+  ],
+  "primary": {
+    "value": 48.6,
+    "unit": "ms",
+    "label": "每批推理耗时",
+    "digits": 2
+  },
+  "secondary": "示例值，仅用于演示界面",
+  "correctness": "示例验收通过",
+  "sources": [
+    {
+      "path": "evidence.json",
+      "label": "虚构示例记录",
+      "sha256": "77b2e6067d3478e62d36a1225c6089ad23176b093866a323c49c4bd18d578301"
+    }
+  ],
+  "next_steps": [
+    "独立复测相同工作量并记录变化。"
+  ],
+  "limitations": [
+    "所有数值均为虚构，不代表任何设备或算法的真实成绩。"
+  ],
+  "jobs": [
+    {
+      "id": "demo-002",
+      "label": "示例复测",
+      "version": "v2",
+      "state": "COMPLETED",
+      "elapsed": "00:01:15",
+      "observed_at": "2026-01-01T09:00:00+00:00"
+    }
+  ],
+  "chart": {
+    "title": "每批推理耗时",
+    "unit": "ms",
+    "direction": "lower",
+    "digits": 2,
+    "insight": "固定演示工作量 · 基线与两次复测",
+    "note": "虚构数据。真实比较时请保持工作量、硬件与计时边界一致。",
+    "labels": [
+      "基线",
+      "优化第一次",
+      "优化复测"
+    ],
+    "series": [
+      {
+        "name": "每批推理耗时",
+        "values": [
+          82.0,
+          49.2,
+          48.0
+        ]
+      }
+    ]
+  },
+  "bounds": {
+    "status": "unknown",
+    "kind": "待建立模型",
+    "current": "48.6 ms",
+    "headline": "尚无足够输入估计上界",
+    "ceiling": "需要工作量与资源吞吐测量",
+    "gap": "不生成缺乏依据的百分比。",
+    "meaning": "参考值与测量条件必须一同说明。",
+    "derivation": [],
+    "assumptions": [
+      "虚构的固定硬件条件与固定工作量。"
+    ],
+    "next_measurements": [
+      "补充持续频率、资源配额和重复测量。"
+    ],
+    "model": {}
+  }
+}

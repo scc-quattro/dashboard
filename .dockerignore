@@ -1,0 +1,8 @@
+*
+!collector.py
+!server.py
+!traces.py
+!static/
+!static/**
+!examples/
+!examples/**

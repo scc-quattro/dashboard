@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "demo": true,
+  "title": "My Project Dashboard",
+  "subtitle": "请替换为自己的项目报告",
+  "timezone": "Asia/Shanghai",
+  "refresh_seconds": 60,
+  "phase_labels": [
+    "代码与数据",
+    "环境与小测",
+    "完整基线",
+    "优化与验证"
+  ],
+  "traces": {
+    "enabled": false
+  },
+  "projects": [
+    {
+      "id": "my-project",
+      "name": "My Project",
+      "kind": "CPU",
+      "cluster": "Local",
+      "description": "项目说明",
+      "path": "./local-data/my-project",
+      "report": "dashboard.json"
+    }
+  ]
+}

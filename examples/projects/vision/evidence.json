@@ -1,0 +1,12 @@
+{
+  "synthetic": true,
+  "note": "Fictional data for the public template; not a benchmark result.",
+  "workload": "demo-fixed-workload",
+  "unit": "ms",
+  "observations": [
+    82.0,
+    49.2,
+    48.0
+  ],
+  "validation": "passed"
+}

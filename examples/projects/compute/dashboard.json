@@ -1,0 +1,119 @@
+{
+  "stage": "演示 · 基线已验证",
+  "tone": "success",
+  "summary": "矩阵计算实验的虚构展示数据，请替换为自己的项目报告。",
+  "baseline_verified": true,
+  "phase_states": [
+    "done",
+    "done",
+    "done",
+    "active"
+  ],
+  "primary": {
+    "value": 3.2,
+    "unit": "TFLOPS",
+    "label": "同规模吞吐率",
+    "digits": 2
+  },
+  "secondary": "示例值，仅用于演示界面",
+  "correctness": "示例验收通过",
+  "sources": [
+    {
+      "path": "evidence.json",
+      "label": "虚构示例记录",
+      "sha256": "b865846bdfab7e6480fd0e0fa87e90e236df96dbcdae5cd97d30aa445b3cb17c"
+    }
+  ],
+  "next_steps": [
+    "独立复测相同工作量并记录变化。"
+  ],
+  "limitations": [
+    "所有数值均为虚构，不代表任何设备或算法的真实成绩。"
+  ],
+  "jobs": [
+    {
+      "id": "demo-001",
+      "label": "示例复测",
+      "version": "v2",
+      "state": "COMPLETED",
+      "elapsed": "00:01:15",
+      "observed_at": "2026-01-01T09:00:00+00:00"
+    }
+  ],
+  "chart": {
+    "title": "同规模吞吐率",
+    "unit": "TFLOPS",
+    "direction": "higher",
+    "digits": 2,
+    "insight": "固定演示工作量 · 基线与两次复测",
+    "note": "虚构数据。真实比较时请保持工作量、硬件与计时边界一致。",
+    "labels": [
+      "基线",
+      "优化第一次",
+      "优化复测"
+    ],
+    "series": [
+      {
+        "name": "同规模吞吐率",
+        "values": [
+          1.8,
+          3.12,
+          3.28
+        ]
+      }
+    ]
+  },
+  "bounds": {
+    "status": "reference",
+    "kind": "条件参考",
+    "current": "3.2 TFLOPS",
+    "headline": "演示固定条件下的参考差距",
+    "ceiling": "示例硬件参考为 5.00 TFLOPS",
+    "gap": "参考占比 64%，不代表设备利用率。",
+    "meaning": "参考值与测量条件必须一同说明。",
+    "derivation": [
+      "演示：3.20 / 5.00 × 100% = 64%。"
+    ],
+    "assumptions": [
+      "虚构的固定硬件条件与固定工作量。"
+    ],
+    "next_measurements": [
+      "补充持续频率、资源配额和重复测量。"
+    ],
+    "model": {
+      "reference_percent": 64.0
+    }
+  },
+  "learning": {
+    "versions": [
+      {
+        "version": "v1",
+        "status": "示例基线",
+        "title": "先明确测量边界",
+        "result": "保存输入、配置与完整流程计时。",
+        "before": "只有零散性能数值",
+        "after": "固定输入与明确验收",
+        "bottleneck": "缺少可重复对照。",
+        "change": "固定工作量、执行环境和计时范围。",
+        "validate": "把校验报告作为 SHA256 绑定的来源。",
+        "lesson": "先建立可靠的基线，再讨论加速。",
+        "boundary": "本页是虚构示例，不是实际优化报告。",
+        "source": "evidence.json"
+      },
+      {
+        "version": "v2",
+        "status": "示例优化",
+        "title": "用复测检验改动",
+        "result": "两次独立复测保留原始观测。",
+        "before": "只看单次最快结果",
+        "after": "比较两次独立测量",
+        "bottleneck": "运行波动可能被误认为提升。",
+        "change": "保留相同输入与资源配置，记录两次结果。",
+        "validate": "验收完成后更新报告和证据摘要。",
+        "lesson": "区分可重复收益与单次观测。",
+        "boundary": "虚构数值，仅展示数据结构。",
+        "source": "evidence.json"
+      }
+    ]
+  }
+}

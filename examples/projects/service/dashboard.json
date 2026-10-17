@@ -1,0 +1,42 @@
+{
+  "stage": "演示 · 环境准备",
+  "tone": "neutral",
+  "summary": "服务化与部署验证的虚构展示数据，请替换为自己的项目报告。",
+  "baseline_verified": false,
+  "phase_states": [
+    "done",
+    "active",
+    "pending",
+    "pending"
+  ],
+  "primary": {
+    "text": "待验证",
+    "unit": "",
+    "label": "等待基线"
+  },
+  "secondary": "示例值，仅用于演示界面",
+  "correctness": "尚无完整基线",
+  "sources": [
+    {
+      "path": "evidence.json",
+      "label": "虚构示例记录",
+      "sha256": "c270e8cc15fc5671c94e403fa0b352fd302a02c64e235a10f64055b8eed39090"
+    }
+  ],
+  "next_steps": [
+    "完成一次完整基线并保存验收证据。"
+  ],
+  "limitations": [
+    "所有数值均为虚构，不代表任何设备或算法的真实成绩。"
+  ],
+  "jobs": [
+    {
+      "id": "demo-004",
+      "label": "示例复测",
+      "version": "v2",
+      "state": "PENDING",
+      "elapsed": "00:00:00",
+      "observed_at": "2026-01-01T09:00:00+00:00"
+    }
+  ]
+}
